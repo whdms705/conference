@@ -16,6 +16,7 @@ import org.springframework.validation.BindingResult;
 
 import java.time.LocalTime;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Transactional
@@ -41,6 +42,13 @@ public class ConferenceService {
         return conferenceMapper.insertConference(conference);
     }
 
+    public boolean isAvailReservation(ConferenceDto conferenceDto){
+        List<Conference> list = conferenceMapper.selectConTimeByConDate(conferenceDto);
+        List<String> timeList = list.stream().map(l -> l.getConTime()).collect(Collectors.toList());
+
+        return false;
+    }
+
     public boolean checkFormatTime(ConferenceDto conferenceDto){
         boolean check = true;
         String[] startTime = conferenceDto.getStartTime().split(":");
@@ -53,11 +61,9 @@ public class ConferenceService {
             return true;
         }
 
-
         if(("00".equals(startTime[1]) || "30".equals(startTime[1])) && ("00".equals(endTime[1]) || "30".equals(endTime[1]))){
             return false;
         }
-
 
         return  check;
     }
