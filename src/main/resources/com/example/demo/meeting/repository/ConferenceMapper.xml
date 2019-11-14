@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.demo.meeting.repository.ConferenceMapper">
+
+    <select id="selectAllConference" resultType="Conference">
+        SELECT *
+          FROM conference
+    </select>
+
+    <select id="selectConTimeByConDate" parameterType="ConferenceDto" resultType="Conference">
+        SELECT *
+          FROM conference
+          where 1=1
+          and con_date = #{conDate}
+          and con_name = #{conName}
+    </select>
+
+    <insert id="insertConference" useGeneratedKeys="true" keyProperty="conSeq" parameterType="Conference">
+      insert into conference (con_name, con_user, con_date, con_time, is_repeat)
+      values ( #{conName}, #{conUser} , #{conDate} , #{conTime} , #{isRepeat} )
+    </insert>
+
+
+
+</mapper>
