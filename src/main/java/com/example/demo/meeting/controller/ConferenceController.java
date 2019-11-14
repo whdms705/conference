@@ -3,6 +3,7 @@ package com.example.demo.meeting.controller;
 import com.example.demo.exception.ApiException;
 import com.example.demo.meeting.model.ApiResult;
 import com.example.demo.meeting.model.ConferenceDto;
+import com.example.demo.meeting.repository.ConferenceMapper;
 import com.example.demo.meeting.service.ConferenceService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +11,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
@@ -23,8 +21,12 @@ import javax.validation.Valid;
 public class ConferenceController {
 
 
-    @Qualifier("conferenceService")
+    //@Qualifier("conferenceService")
+    @Autowired
     private ConferenceService conferenceService;
+
+    @Autowired
+    private ConferenceMapper conferenceMapper;
 
 
     @PostMapping("/reservation")
@@ -35,6 +37,14 @@ public class ConferenceController {
         /*return ApiResult.builder()
                 .status(HttpStatus.OK.value())
                 .build();*/
+    }
+
+    @GetMapping("/con-name/{conName}/con-date/{conDate}")
+    public Object getConTime(){
+        ConferenceDto conferenceDto = new ConferenceDto();
+        conferenceDto.setConDate("2019-11-15");
+        conferenceDto.setConName("B");
+        return conferenceMapper.selectConTimeByConDate(conferenceDto);
     }
 
 

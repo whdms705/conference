@@ -11,6 +11,6 @@ CREATE TABLE  conference( con_seq INT PRIMARY KEY AUTO_INCREMENT
 );
 
 
-INSERT INTO conference (con_name, con_user, con_date, con_time, is_repeat) VALUES ('A','eunho',now(),'1,2,3,',0);
+INSERT INTO conference (con_name, con_user, con_date, con_time, is_repeat) VALUES ('B','eunho',now(),'1,2,3,',0);
 INSERT INTO conference (con_name, con_user, con_date, con_time, is_repeat) VALUES ('B','eunho',now(),'5,6,',0);
 INSERT INTO conference (con_name, con_user, con_date, con_time, is_repeat) VALUES ('C','eunho',now(),'9,10',0);

@@ -285,7 +285,11 @@ public class ConferenceServiceTests {
 
     @Test
     public void 동일한회의실_동일시간에_예약불가_테스트(){
+        //given
+        conferenceDto.setConDate("2019-11-15");
 
+        // when
+       boolean result  = conferenceService.isAvailReservation(conferenceDto);
     }
 
 }

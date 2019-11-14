@@ -28,14 +28,14 @@ public class ConferenceMapperTests {
     public void setup(){
         conferenceDto = new ConferenceDto();
         conferenceDto.setConName("B");
-        conferenceDto.setConDate("2019-11-10");
+        conferenceDto.setConDate("2019-11-15");
 
     }
 
     @Test
     public void 해당날짜에_선택한회의실_현황조회_테스트(){
         List<Conference> list = conferenceMapper.selectConTimeByConDate(conferenceDto);
-        assertNotNull(list);
+        assertTrue(!list.isEmpty());
     }
 
 }

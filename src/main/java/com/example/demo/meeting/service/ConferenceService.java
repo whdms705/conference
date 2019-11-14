@@ -7,8 +7,8 @@ import com.example.demo.exception.ErrorMessage;
 import com.example.demo.meeting.model.Conference;
 import com.example.demo.meeting.model.ConferenceDto;
 import com.example.demo.meeting.repository.ConferenceMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.bind.BindResult;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +18,7 @@ import java.time.LocalTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
-
+@Slf4j
 @Transactional
 @Service
 public class ConferenceService {
@@ -44,7 +44,12 @@ public class ConferenceService {
 
     public boolean isAvailReservation(ConferenceDto conferenceDto){
         List<Conference> list = conferenceMapper.selectConTimeByConDate(conferenceDto);
+        //String conTimes = list.stream().map(Conference::getConTime).reduce((r1,r2) -> r1+","+r2).get();
         List<String> timeList = list.stream().map(l -> l.getConTime()).collect(Collectors.toList());
+        //log.info("conTimes : ",conTimes);
+
+
+
 
         return false;
     }
