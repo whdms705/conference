@@ -14,6 +14,13 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+
+// @Rule 사용해보자
+// @transactional rollback
+// @Autowired -> 생성자로 변환
+
+
+
 @Slf4j
 @SpringBootTest
 @RunWith(SpringRunner.class)

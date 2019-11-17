@@ -2,7 +2,7 @@ package com.example.demo.exception;
 
 public enum ErrorMessage {
 
-    INVALID_TIME_FORMAT("1","%s 파라미터가 날짜포맷이 맞지 않습니다.");
+    INVALID_TIME_FORMAT("1","파라미터가 날짜포맷이 맞지 않습니다.");
 
     private String errorCode;
     private String errorMessage;

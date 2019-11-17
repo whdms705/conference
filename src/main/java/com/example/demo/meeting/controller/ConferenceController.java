@@ -25,7 +25,7 @@ public class ConferenceController {
 
 
     @PostMapping("/reservation")
-    public void uploadData(@Valid ConferenceDto conferenceDto, BindingResult bindingResult){
+    public void uploadData(@RequestBody @Valid ConferenceDto conferenceDto, BindingResult bindingResult){
 
         log.info("111111");
         int result = conferenceService.insertConference(conferenceDto,bindingResult);
@@ -35,10 +35,10 @@ public class ConferenceController {
     }
 
     @GetMapping("/con-name/{conName}/con-date/{conDate}")
-    public Object getConTime(){
+    public Object getConTime(@PathVariable String conDate,@PathVariable String conName){
         ConferenceDto conferenceDto = new ConferenceDto();
-        conferenceDto.setConDate("2019-11-15");
-        conferenceDto.setConName("B");
+        conferenceDto.setConDate(conDate);
+        conferenceDto.setConName(conName);
         return conferenceMapper.selectConTimeByConDate(conferenceDto);
     }
 

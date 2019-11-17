@@ -3,7 +3,7 @@ package com.example.demo.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(value = HttpStatus.BAD_REQUEST , reason = "bad request")
+@ResponseStatus(value = HttpStatus.BAD_REQUEST , reason = "파라미터가 날짜포맷이 맞지 않습니다.")
 public class ApiException extends RuntimeException {
 
     private static final long serialVersionUID = -5540112835469012749L;

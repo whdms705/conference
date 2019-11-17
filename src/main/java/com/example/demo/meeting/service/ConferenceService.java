@@ -53,9 +53,11 @@ public class ConferenceService {
     public boolean isAvailReservation(ConferenceDto conferenceDto,String conTime){
         boolean result = false;
         LocalDateTime now = LocalDateTime.now();
+
         Set<String> set = new HashSet<>();
         String[] requestTime = conTime.split(",");
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
 
         for(int i=0;i<conferenceDto.getIsRepeat()+1;i++){
             set.clear();
