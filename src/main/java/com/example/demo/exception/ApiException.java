@@ -3,7 +3,7 @@ package com.example.demo.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-//@ResponseStatus() http status 하드코딩
+@ResponseStatus(value = HttpStatus.BAD_REQUEST , reason = "bad request")
 public class ApiException extends RuntimeException {
 
     private static final long serialVersionUID = -5540112835469012749L;

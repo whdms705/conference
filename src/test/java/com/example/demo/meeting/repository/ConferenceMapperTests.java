@@ -28,7 +28,7 @@ public class ConferenceMapperTests {
     public void setup(){
         conferenceDto = new ConferenceDto();
         conferenceDto.setConName("B");
-        conferenceDto.setConDate("2019-11-15");
+        conferenceDto.setConDate("2019-11-17");
 
     }
 

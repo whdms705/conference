@@ -14,12 +14,12 @@
         SELECT *
           FROM conference
           where 1=1
-          and con_date = #{conDate}
-          and con_name = #{conName}
+          and conDate = #{conDate}
+          and conName = #{conName}
     </select>
 
     <insert id="insertConference" useGeneratedKeys="true" keyProperty="conSeq" parameterType="Conference">
-      insert into conference (con_name, con_user, con_date, con_time, is_repeat)
+      insert into conference (conName, conUser, conDate, conTime, isRepeat)
       values ( #{conName}, #{conUser} , #{conDate} , #{conTime} , #{isRepeat} )
     </insert>
 

@@ -14,8 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.BindingResult;
 
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Slf4j
@@ -31,6 +35,8 @@ public class ConferenceService {
     }
 
     public int insertConference(ConferenceDto conferenceDto, BindingResult bindingResult){
+
+        // parameter format validation
         if((bindingResult.hasErrors()) || checkFormatTime(conferenceDto)){
             throw new ApiException(
                     ErrorMessage.INVALID_TIME_FORMAT.getErrorMessage(),
@@ -38,20 +44,47 @@ public class ConferenceService {
                     ErrorMessage.INVALID_TIME_FORMAT.getErrorCode()
             );
         }
+
+        // reservation validation
         Conference conference =  this.convertConTime(conferenceDto);
         return conferenceMapper.insertConference(conference);
     }
 
-    public boolean isAvailReservation(ConferenceDto conferenceDto){
-        List<Conference> list = conferenceMapper.selectConTimeByConDate(conferenceDto);
-        //String conTimes = list.stream().map(Conference::getConTime).reduce((r1,r2) -> r1+","+r2).get();
-        List<String> timeList = list.stream().map(l -> l.getConTime()).collect(Collectors.toList());
-        //log.info("conTimes : ",conTimes);
+    public boolean isAvailReservation(ConferenceDto conferenceDto,String conTime){
+        boolean result = false;
+        LocalDateTime now = LocalDateTime.now();
+        Set<String> set = new HashSet<>();
+        String[] requestTime = conTime.split(",");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        for(int i=0;i<conferenceDto.getIsRepeat()+1;i++){
+            set.clear();
+            String changeTime = now.plusWeeks(i).format(formatter);
+log.info("changeTime : ",changeTime);
+            conferenceDto.setConDate(changeTime);
+            List<Conference> list = conferenceMapper.selectConTimeByConDate(conferenceDto);
+            String[] conTimes = list.stream().map(Conference::getConTime).reduce((r1,r2) -> r1+r2).get().split(",");
+            for(String s: conTimes){
+                set.add(s);
+            }
+            int repeatCheck = 0;
+            for(String s: requestTime){
+                if(set.contains(s)){
+                    repeatCheck++;
+                }
+                if(repeatCheck>=2){
+                    result = true;
+                    break;
+
+                }
+            }
 
 
+        }
 
+        System.out.println("1");
 
-        return false;
+        return result;
     }
 
     public boolean checkFormatTime(ConferenceDto conferenceDto){

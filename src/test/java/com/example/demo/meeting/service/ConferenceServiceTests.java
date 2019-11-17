@@ -284,12 +284,31 @@ public class ConferenceServiceTests {
     }
 
     @Test
-    public void 동일한회의실_동일시간에_예약불가_테스트(){
+    public void 동일한회의실_반복예약이없는경우_동일시간에_예약불가_테스트(){
         //given
-        conferenceDto.setConDate("2019-11-15");
+        conferenceDto.setConDate("2019-11-17");
+        String conTime = "3,4,5,6";
 
         // when
-       boolean result  = conferenceService.isAvailReservation(conferenceDto);
+       boolean result  = conferenceService.isAvailReservation(conferenceDto,conTime);
+       // true인 경우 예약불가
+
+       // then
+       assertTrue(result);
+    }
+
+    @Test
+    public void 동일한회의실_반복예약이있는경우_동일시간에_예약불가_테스트(){
+        //given
+        conferenceDto.setConDate("2019-11-17");
+        conferenceDto.setIsRepeat(2);
+        String conTime = "3,4,";
+
+        // when
+        boolean result  = conferenceService.isAvailReservation(conferenceDto,conTime);
+
+        // then
+        assertTrue(result);
     }
 
 }
