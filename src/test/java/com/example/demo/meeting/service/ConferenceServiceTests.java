@@ -1,5 +1,6 @@
 package com.example.demo.meeting.service;
 
+import com.example.demo.common.TimeMap;
 import com.example.demo.meeting.model.Conference;
 import com.example.demo.meeting.model.ConferenceDto;
 import lombok.extern.slf4j.Slf4j;
@@ -17,10 +18,12 @@ import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
 
 import java.beans.PropertyEditor;
+import java.sql.Time;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 @Slf4j
@@ -309,6 +312,14 @@ public class ConferenceServiceTests {
 
         // then
         assertTrue(result);
+    }
+
+    @Test
+    public void TimeMap_싱글인스턴스_확인_테스트(){
+        TimeMap map1 = TimeMap.getInstance();
+        TimeMap map2 = TimeMap.getInstance();
+
+        assertSame(map1,map2);// 객체가 같은지 비교
     }
 
 }

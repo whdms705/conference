@@ -16,6 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 //@WebMvcTest(ConferenceController.class) // web과 관련된 bean생
+// OjectMapper
 
 @Slf4j
 @RunWith(SpringRunner.class)

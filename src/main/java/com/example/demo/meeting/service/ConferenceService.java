@@ -121,8 +121,9 @@ log.info("changeTime : ",changeTime);
 
             String conTime = "";
 
-            TimeMap time = new TimeMap();
-            for(int i=time.map.get(start);i<=time.map.get(end);i++){
+            TimeMap time = TimeMap.getInstance();
+
+            for(int i=time.get(start);i<=time.get(end);i++){
                 conTime = conTime+String.valueOf(i)+",";
             }
 

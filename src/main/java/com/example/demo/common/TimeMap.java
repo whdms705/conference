@@ -4,11 +4,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-// TO-DO : echache로 처리
+// 싱글톤 방식으로 하나의 인스턴스로 TimeMap 관리
 public class TimeMap {
-    public Map<String,Integer> map;
+    private static Map<String,Integer> map;
 
-    public TimeMap(){
+    public static TimeMap getInstance() {
+        return LazyHolder.INSTANCE;
+    }
+
+    public int get(String time){
+        return map.get(time);
+    }
+
+    private static class LazyHolder {
+        private static final TimeMap INSTANCE = new TimeMap();
+    }
+
+    private TimeMap(){
         Map<String,Integer> map = new HashMap<>();
         map.put("09:00",0);
         map.put("09:30",1);
