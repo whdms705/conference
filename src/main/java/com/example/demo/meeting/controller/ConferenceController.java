@@ -48,4 +48,12 @@ public class ConferenceController {
     }
 
 
+    @GetMapping("/test")
+    public Object test(){
+        for(int i=0;i<1000000;i++){
+            ConferenceDto conferenceDto = new ConferenceDto();
+        }
+        return "1";
+    }
+
 }
