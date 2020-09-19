@@ -16,5 +16,6 @@ public interface ConferenceMapper {
     List<Conference> selectAllConference();
 
     int insertConference(Conference conference);
+
     List<Conference> selectConTimeByConDate(ConferenceDto conferenceDto);
 }
